@@ -12,7 +12,8 @@ const dict = [
 const App = () => {
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
-  const search = () => {
+  const search = (e) => {
+    e.preventDefault();
     const ans = dict.filter(
       (d) => d.word.toLowerCase() === input.toLowerCase()
     )[0]?.meaning;
@@ -22,14 +23,16 @@ const App = () => {
   return (
     <div>
       <h1>Dictionary App</h1>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={search}>Search</button>
+      <form onSubmit={search}>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
       <p>Definition:</p>
-      {result}
+      <p>{result}</p>
     </div>
   );
 };
